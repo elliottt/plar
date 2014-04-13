@@ -3,7 +3,7 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE ParallelListComp #-}
 
-module Prop where
+module Prop.Base where
 
 import Formula
 import PP
@@ -37,7 +37,7 @@ eval p v = go (fmap v p)
   go (And a b) = go a && go b
   go (Or a b)  = go a || go b
   go (Imp a b) = not (go a) || go b
-  go (Iff a b) = go (Imp a b /\ Imp b a)
+  go (Iff a b) = go a == go b
   go Forall{}  = error "forall not supported"
   go Exists{}  = error "exists not supported"
 
