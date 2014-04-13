@@ -34,6 +34,9 @@ instance PP atom => PP (Formula atom) where
   ppr _ (Forall a f)= text "forall" <+> text a <> char '.' <+> pp f
   ppr _ (Exists a f)= text "exists" <+> text a <> char '.' <+> pp f
 
+neg :: Formula atom -> Formula atom
+neg  = Not
+
 infixl 7 /\
 (/\) :: Formula atom -> Formula atom -> Formula atom
 (/\)  = And
@@ -46,7 +49,7 @@ infixl 6 \/
 (==>)  = Imp
 
 (<=>) :: Formula atom -> Formula atom -> Formula atom
-(<=>)  = Imp
+(<=>)  = Iff
 
 atoms :: Ord atom => Formula atom -> Set.Set atom
 atoms  = foldMap Set.singleton
