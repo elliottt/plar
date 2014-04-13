@@ -57,6 +57,8 @@ printTruthTable p =
                    versions <- go xs
                    return ((x |=> val) versions)
 
+    go _      = return (\x -> error (x ++ " not defined"))
+
   header = hsep [ text x $$ nest len pipe | x <- vars | len <- lens ]
        <+> pp p
 
