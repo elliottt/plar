@@ -21,6 +21,10 @@ commas  = punctuate comma
 pipe :: Doc
 pipe  = char '|'
 
+bracket :: Bool -> Doc -> Doc
+bracket useParens body | useParens = sep [ char '(', nest 2 body, char ')' ]
+                       | otherwise =                 body
+
 class PP a where
   ppr     :: Int ->  a  -> Doc
   pprList :: Int -> [a] -> Doc
